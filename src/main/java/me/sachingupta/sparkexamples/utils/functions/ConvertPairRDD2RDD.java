@@ -19,7 +19,7 @@ public class ConvertPairRDD2RDD implements FlatMapFunction<Tuple2<String, String
 
 	@Override
 	public Iterator<String> call(Tuple2<String, String> t) throws Exception {
-		
+		logger.debug("Inside ConvertPairRDD2RDD FlatMapFunction");
 		String fileName = t._1();
 		String content = t._2();
 		
@@ -34,7 +34,7 @@ public class ConvertPairRDD2RDD implements FlatMapFunction<Tuple2<String, String
 				index ++;
 				continue;
 			}
-			// logger.info("Line content is {}", line);
+			logger.debug("Line content is {}", line);
 			lines.add(line +  ","  + fileName);
 		}
 		
