@@ -1,0 +1,122 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>me.sachingupta</groupId>
+  <artifactId>sparkexamples</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>SparkExamples</name>
+  <description>Spark examples</description>
+  
+  <properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+  	<apache.hadoop.version>3.2</apache.hadoop.version>
+  	<apache.spark.version>3.1.1</apache.spark.version>
+  	<apache.spark.artifact.version>2.12</apache.spark.artifact.version>
+  	<junit.jupiter.version>5.7.1</junit.jupiter.version>
+  	<junit.platform.version>1.7.1</junit.platform.version>
+  </properties>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>org.apache.spark</groupId>
+  		<artifactId>spark-core_${apache.spark.artifact.version}</artifactId>
+  		<version>${apache.spark.version}</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.apache.spark</groupId>
+  		<artifactId>spark-sql_${apache.spark.artifact.version}</artifactId>
+  		<version>${apache.spark.version}</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.apache.spark</groupId>
+  		<artifactId>spark-streaming_${apache.spark.artifact.version}</artifactId>
+  		<version>${apache.spark.version}</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.apache.spark</groupId>
+  		<artifactId>spark-mllib_${apache.spark.artifact.version}</artifactId>
+  		<version>${apache.spark.version}</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.apache.spark</groupId>
+  		<artifactId>spark-graphx_${apache.spark.artifact.version}</artifactId>
+  		<version>${apache.spark.version}</version>
+  	</dependency>
+  	
+  	<!-- Project Lombook for reducing the boilerplate -->
+  	<dependency>
+  		<groupId>org.projectlombok</groupId>
+  		<artifactId>lombok</artifactId>
+  		<version>1.18.16</version>
+  	</dependency>
+  	
+  	<dependency>
+    	<groupId>org.apache.commons</groupId>
+    	<artifactId>commons-lang3</artifactId>
+    	<version>3.12.0</version>
+	</dependency>
+  	
+  	
+  	<!-- Testing Libs -->
+  	
+  	<dependency>
+		<groupId>org.junit.jupiter</groupId>
+		<artifactId>junit-jupiter-engine</artifactId>
+		<version>${junit.jupiter.version}</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.junit.jupiter</groupId>
+		<artifactId>junit-jupiter-params</artifactId>
+		<version>${junit.jupiter.version}</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+	    <groupId>org.junit.platform</groupId>
+	    <artifactId>junit-platform-runner</artifactId>
+	    <version>${junit.platform.version}</version>
+	    <scope>test</scope>
+	</dependency>
+  	
+  </dependencies>
+  
+  <!-- <build>
+  	<plugins>
+  		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>2.22.2</version>
+			<dependencies>
+				<dependency>
+					<groupId>org.junit.platform</groupId>
+					<artifactId>unit-platform-surefire-provider</artifactId>
+					<version>${junit.platform.version}</version>
+				</dependency>
+			</dependencies>
+			<configuration>
+				<additionalClasspathElements>
+					<additionalClasspathElement>src/test/</additionalClasspathElement>
+				</additionalClasspathElements>
+			</configuration>
+  		</plugin>
+  	</plugins>
+  </build>
+  
+  <reporting>
+  	<plugins>
+  		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>2.22.2</version>
+  		</plugin>
+  	</plugins>
+  </reporting> -->
+  
+</project>
