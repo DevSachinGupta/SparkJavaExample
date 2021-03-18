@@ -65,6 +65,10 @@ Give an example
 
 ## Deployment
 
+```
+spark-submit --class "me.sachingupta.sparkexamples.Main" --deploy-mode client --master local\[\*\] target/sparkexamples-0.0.1-SNAPSHOT.jar
+```
+
 Add additional notes about how to deploy this on a live system
 
 ## Built With
