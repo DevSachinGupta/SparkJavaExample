@@ -23,10 +23,13 @@ public class Fortune500Service implements Serializable {
 	private JavaRDD<String> lines;
 	private JavaPairRDD<String, String> linesWithFileName;
 	
+	private String filePath;
+	
 	private static final Logger log = LoggerFactory.getLogger(Fortune500Service.class);
 	
 	public Fortune500Service(String appName, String masterUrl, String filePath) {
 		
+		this.filePath = filePath;
 		log.info("Application name is {}, path to file(s) is {}", appName, filePath);
 		
 		conf = new SparkConf().setAppName(appName).setMaster(masterUrl);
@@ -60,6 +63,8 @@ public class Fortune500Service implements Serializable {
 		log.info("total count of the lines after 2nd conversion is {}", data.count());
 		
 		// data is final dataframe to use for further processing...
+		data.saveAsTextFile(filePath + "_final.txt");
+		
 		
 	}
 
@@ -71,8 +76,8 @@ public class Fortune500Service implements Serializable {
 		public Fortune500 call(String v1) throws Exception {
 			String[] str = PatternsUtility.CSV.split(v1);
 			
-			if(str[1] == null || str[1].equalsIgnoreCase("n.a.") || str[1].equalsIgnoreCase("na") || str[1].equalsIgnoreCase("n.a") || str[1].equalsIgnoreCase("na.")) {
-				str[1] = "0";
+			if(str[0] == null || str[0].equalsIgnoreCase("n.a.") || str[0].equalsIgnoreCase("na") || str[0].equalsIgnoreCase("n.a") || str[0].equalsIgnoreCase("na.")) {
+				str[0] = "0";
 			}
 			if(str[2] == null || str[2].equalsIgnoreCase("n.a.") || str[2].equalsIgnoreCase("na") || str[2].equalsIgnoreCase("n.a") || str[2].equalsIgnoreCase("na.")) {
 				str[2] = "0";
@@ -80,7 +85,6 @@ public class Fortune500Service implements Serializable {
 			if(str[3] == null || str[3].equalsIgnoreCase("n.a.") || str[3].equalsIgnoreCase("na") || str[3].equalsIgnoreCase("n.a") || str[3].equalsIgnoreCase("na.")) {
 				str[3] = "0";
 			}
-			
 			// log.info("Year string {}", str[4]);
 			
 			String str1 = str[4].replaceAll("\\D", " ").trim().replaceAll("\\s+", " ");
