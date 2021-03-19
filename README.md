@@ -16,11 +16,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/DevSachinGupta/SparkJavaExample" align="center">
-    <img src="images/spark1.png" alt="Logo" width="80" height="80">
-	<img src="images/plus.png" alt="Logo" width="20" height="20">
-	<img src="images/java1.png" alt="Logo" width="80" height="80">
-  </a>
+  <div>
+    <img src="images/spark1.png" alt="Logo" width="250" height="150">
+	<img src="images/plus.png" alt="Logo" width="80" height="80" style="margin-bottom:10px;">
+	<img src="images/java1.png" alt="Logo" width="250" height="150">
+  </div>
 
   <h3 align="center">SparkJavaExample</h3>
 
@@ -160,11 +160,11 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/DevSachinGupta/SparkJavaExample/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Sachin Gupta** - *Initial work* - [PurpleBooth](https://github.com/DevSachinGupta)
 
 See also the list of [contributors](https://github.com/DevSachinGupta/SparkJavaExample/graphs/contributors) who participated in this project.
 
