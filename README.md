@@ -16,11 +16,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <div>
+  <a href="https://github.com/DevSachinGupta/SparkJavaExample" align="center">
     <img src="images/spark1.png" alt="Logo" width="250" height="150">
-	<img src="images/plus.png" alt="Logo" width="80" height="80" style="margin-bottom:10px;">
+	<img src="images/plus.png" alt="Logo" width="80" height="80" style="margin-bottom: 2%;">
 	<img src="images/java1.png" alt="Logo" width="250" height="150">
-  </div>
+  </a>
 
   <h3 align="center">SparkJavaExample</h3>
 
