@@ -16,8 +16,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template" align="center">
-    <img src="images/saprk1.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/DevSachinGupta/SparkJavaExample" align="center">
+    <img src="images/spark1.png" alt="Logo" width="80" height="80">
 	<img src="images/plus.png" alt="Logo" width="20" height="20">
 	<img src="images/java1.png" alt="Logo" width="80" height="80">
   </a>
@@ -27,14 +27,14 @@
   <p align="center">
     Basically java based Apache Spark Examples.
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/DevSachinGupta/SparkJavaExample"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/DevSachinGupta/SparkJavaExample">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/DevSachinGupta/SparkJavaExample/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/DevSachinGupta/SparkJavaExample/issues">Request Feature</a>
   </p>
 </p>
 
@@ -70,7 +70,13 @@
 This contains Java based spark examples.
 
 Tried using JavaRDD to read csv file and parsing.
-	
+
+## Built With
+
+* [Java 8](https://www.oracle.com/in/java/technologies/javase/javase-jdk8-downloads.html) - The application development technology
+* [Apache Spark](https://spark.apache.org/) - The platform to run the spark
+* [Maven](https://maven.apache.org/) - Dependency Management
+
 
 ## Getting Started
 
@@ -81,9 +87,26 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
-* [](Java 8)
-  
+* Java 8
+	1. On Windows follow the Installer.
+	2. On Ubuntu
+	```
+		sudo apt install openjdk-8-jdk
+	```
+* Apache Spark
+	Download spark from https://spark.apache.org/
+		In this we are using spark 3.1.1 prebuilt for hadoop 3.2
+	
+	Untar files to folder
+	```
+		SPARK_HOME=<Path-to-spark-extracted-folder>
+		HADOOP_HOME=<Path-to-spark-extracted-folder>
+	```
+* Eclipse
+	Download eclipse from https://www.eclipse.org/downloads/
 
+
+	
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
@@ -130,11 +153,6 @@ spark-submit --class "me.sachingupta.sparkexamples.Main" --deploy-mode client --
 
 Add additional notes about how to deploy this on a live system
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
 ## Contributing
 
@@ -148,7 +166,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 * **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/DevSachinGupta/SparkJavaExample/graphs/contributors) who participated in this project.
 
 ## License
 
@@ -163,16 +181,16 @@ This project is licensed under the Apache License - see the [LICENSE.md](LICENSE
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/DevSachinGupta/SparkJavaExample.svg?style=for-the-badge
+[contributors-url]: https://github.com/DevSachinGupta/SparkJavaExample/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/DevSachinGupta/SparkJavaExample.svg?style=for-the-badge
+[forks-url]: https://github.com/DevSachinGupta/SparkJavaExample/network/members
+[stars-shield]: https://img.shields.io/github/stars/DevSachinGupta/SparkJavaExample.svg?style=for-the-badge
+[stars-url]: https://github.com/DevSachinGupta/SparkJavaExample/stargazers
+[issues-shield]: https://img.shields.io/github/issues/DevSachinGupta/SparkJavaExample.svg?style=for-the-badge
+[issues-url]: https://github.com/DevSachinGupta/SparkJavaExample/issues
+[license-shield]: https://img.shields.io/github/license/DevSachinGupta/SparkJavaExample.svg?style=for-the-badge
+[license-url]: https://github.com/DevSachinGupta/SparkJavaExample/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[linkedin-url]: https://linkedin.com/in/DevSachinGupta
 [product-screenshot]: images/screenshot.png
