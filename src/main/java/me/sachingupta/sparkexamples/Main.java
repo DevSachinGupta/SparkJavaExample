@@ -1,30 +1,47 @@
 package me.sachingupta.sparkexamples;
 
+import org.apache.log4j.Logger;
+
 import me.sachingupta.sparkexamples.services.Fortune500Service;
+import me.sachingupta.sparkexamples.services.LogAnalysisService;
+import me.sachingupta.sparkexamples.services.WordCountService;
 
 public class Main {
+	
+	private static Logger logger = Logger.getLogger(Main.class);
 
 	public Main() {
-		System.out.println("Inside Main constructor");
+		logger.info("Inside Main constructor");
 	}
 	
 	public static void main(String... args) {
 	
-		System.out.println("Inside Main");
+		logger.info("Inside Main");
 		
-		args = new String[3];
-		
-		args[0] = "Fortune500Test";
-		args[1] = "local";
-		args[2] = "file:////home/sachin/eclipse-workspace/datasets/fortune500/";
 		try {
-			// args[2] = Main.class.getClass().getResource("/fortune500/").getPath();
+			
+			//Path p =  
+			
+			switch (args[0]) {
+				case "LogAnalysis":
+					new LogAnalysisService(args[1], args[2], args[3]).extract();
+					break;
+				case "CountWords":
+					new WordCountService(args[1], args[2], args[3]).count();
+					break;
+				case "Fortune500":
+					new Fortune500Service(args[1], args[2], args[3]).extract();
+					break;
+				default:
+					logger.info("Please provide a valid action to perform");
+					break;
+			}
+			
+		} catch (ArrayIndexOutOfBoundsException e) {
+			logger.error("Exception while accessing data from the args ", e);
 		} catch (Exception e) {
-			System.out.println("Exception while getting the file path");
-			e.printStackTrace();
+			logger.error("Exception while getting the file path ", e);
 		}
 		
-		Fortune500Service f = new Fortune500Service(args[0], args[1], args[2]);
-		f.extract();
 	}
 }
