@@ -1,4 +1,4 @@
-package me.sachingupta.sparkexamples.services;
+package me.sachingupta.sparkexamples.services.rdd;
 
 import java.io.Serializable;
 

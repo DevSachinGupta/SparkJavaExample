@@ -2,9 +2,9 @@ package me.sachingupta.sparkexamples;
 
 import org.apache.log4j.Logger;
 
-import me.sachingupta.sparkexamples.services.Fortune500Service;
-import me.sachingupta.sparkexamples.services.LogAnalysisService;
-import me.sachingupta.sparkexamples.services.WordCountService;
+import me.sachingupta.sparkexamples.services.rdd.Fortune500Service;
+import me.sachingupta.sparkexamples.services.rdd.LogAnalysisService;
+import me.sachingupta.sparkexamples.services.rdd.WordCountService;
 
 public class Main {
 	
