@@ -17,7 +17,9 @@
     
   	<apache.hadoop.version>3.2.2</apache.hadoop.version>
   	<apache.spark.version>3.1.1</apache.spark.version>
-  	<apache.spark.artifact.version>2.12</apache.spark.artifact.version>
+  	<apache.spark.scala.build.version>2.12</apache.spark.scala.build.version>
+  	
+  	<apache.kafka.version>2.7.0</apache.kafka.version>
   	
   	<junit.jupiter.version>5.7.1</junit.jupiter.version>
   	<junit.platform.version>1.7.1</junit.platform.version>
@@ -35,31 +37,31 @@
 	<!-- Apache Spark Libraries  -->
 	<dependency>
   		<groupId>org.apache.spark</groupId>
-  		<artifactId>spark-core_${apache.spark.artifact.version}</artifactId>
+  		<artifactId>spark-core_${apache.spark.scala.build.version}</artifactId>
   		<version>${apache.spark.version}</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.apache.spark</groupId>
-  		<artifactId>spark-sql_${apache.spark.artifact.version}</artifactId>
+  		<artifactId>spark-sql_${apache.spark.scala.build.version}</artifactId>
   		<version>${apache.spark.version}</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.apache.spark</groupId>
-  		<artifactId>spark-streaming_${apache.spark.artifact.version}</artifactId>
+  		<artifactId>spark-streaming_${apache.spark.scala.build.version}</artifactId>
   		<version>${apache.spark.version}</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.apache.spark</groupId>
-  		<artifactId>spark-mllib_${apache.spark.artifact.version}</artifactId>
+  		<artifactId>spark-mllib_${apache.spark.scala.build.version}</artifactId>
   		<version>${apache.spark.version}</version>
   	</dependency>
   	
   	<dependency>
   		<groupId>org.apache.spark</groupId>
-  		<artifactId>spark-graphx_${apache.spark.artifact.version}</artifactId>
+  		<artifactId>spark-graphx_${apache.spark.scala.build.version}</artifactId>
   		<version>${apache.spark.version}</version>
   	</dependency>
   	
