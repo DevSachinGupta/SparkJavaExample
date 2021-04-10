@@ -1,5 +1,6 @@
 package me.sachingupta.sparkexamples;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import me.sachingupta.sparkexamples.services.rdd.Fortune500Service;
@@ -17,6 +18,7 @@ public class Main {
 	public static void main(String... args) {
 	
 		logger.info("Inside Main");
+		Logger.getLogger("org.apache").setLevel(Level.WARN);
 		
 		try {
 			
@@ -24,13 +26,13 @@ public class Main {
 			
 			switch (args[0]) {
 				case "LogAnalysis":
-					new LogAnalysisService(args[1], args[2], args[3]).extract();
+					(new LogAnalysisService(args[1], args[2], args[3])).extract();
 					break;
 				case "CountWords":
-					new WordCountService(args[1], args[2], args[3]).count();
+					(new WordCountService(args[1], args[2], args[3])).count();
 					break;
 				case "Fortune500":
-					new Fortune500Service(args[1], args[2], args[3]).extract();
+					(new Fortune500Service(args[1], args[2], args[3])).extract();
 					break;
 				default:
 					logger.info("Please provide a valid action to perform");

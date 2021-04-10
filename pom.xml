@@ -39,17 +39,32 @@
   		<groupId>org.apache.spark</groupId>
   		<artifactId>spark-core_${apache.spark.scala.build.version}</artifactId>
   		<version>${apache.spark.version}</version>
+  		<!-- <scope>provided</scope> -->
   	</dependency>
   	
   	<dependency>
   		<groupId>org.apache.spark</groupId>
   		<artifactId>spark-sql_${apache.spark.scala.build.version}</artifactId>
   		<version>${apache.spark.version}</version>
+  		<!-- <scope>provided</scope> -->
   	</dependency>
   	
   	<dependency>
   		<groupId>org.apache.spark</groupId>
   		<artifactId>spark-streaming_${apache.spark.scala.build.version}</artifactId>
+  		<version>${apache.spark.version}</version>
+  		<!-- <scope>provided</scope> -->
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.apache.spark</groupId>
+  		<artifactId>spark-streaming-kafka-0-10_${apache.spark.scala.build.version}</artifactId>
+  		<version>${apache.spark.version}</version>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>org.apache.spark</groupId>
+  		<artifactId>spark-sql-kafka-0-10_${apache.spark.scala.build.version}</artifactId>
   		<version>${apache.spark.version}</version>
   	</dependency>
   	
@@ -57,12 +72,14 @@
   		<groupId>org.apache.spark</groupId>
   		<artifactId>spark-mllib_${apache.spark.scala.build.version}</artifactId>
   		<version>${apache.spark.version}</version>
+  		<!-- <scope>provided</scope> -->
   	</dependency>
   	
   	<dependency>
   		<groupId>org.apache.spark</groupId>
   		<artifactId>spark-graphx_${apache.spark.scala.build.version}</artifactId>
   		<version>${apache.spark.version}</version>
+  		<!-- <scope>provided</scope> -->
   	</dependency>
   	
   	<!-- Project Lombook for reducing the boilerplate -->

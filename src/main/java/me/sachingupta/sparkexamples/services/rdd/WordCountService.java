@@ -53,7 +53,9 @@ public class WordCountService implements Serializable {
 		
 	}
 	
+	@Override
 	protected void finalize() {
-		sc.close();
+		if (sc != null)
+			sc.close();
 	}
 }

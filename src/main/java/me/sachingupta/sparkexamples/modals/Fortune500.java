@@ -17,5 +17,18 @@ public class Fortune500 implements Serializable {
 	private double profit;
 	private String fileName;
 	private int year;
+	private double profitPercent;
+	
+	public Fortune500(long rank, String companyName, double revenue, double profit, String fileName, int year) {
+		super();
+		this.rank = rank;
+		this.companyName = companyName;
+		this.revenue = revenue;
+		this.profit = profit;
+		this.fileName = fileName;
+		this.year = year;
+		this.profitPercent = (profit/revenue) * 100;
+	}
+	
 	
 }
