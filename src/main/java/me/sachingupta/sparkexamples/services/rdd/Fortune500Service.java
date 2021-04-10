@@ -1,11 +1,13 @@
 package me.sachingupta.sparkexamples.services.rdd;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import me.sachingupta.sparkexamples.modals.Fortune500;
 import me.sachingupta.sparkexamples.utils.PatternsUtility;
 import me.sachingupta.sparkexamples.utils.functions.ConvertPairRDD2RDD;
+import scala.Tuple2;
+import scala.Tuple3;
 
 public class Fortune500Service implements Serializable {
 	
@@ -54,16 +58,34 @@ public class Fortune500Service implements Serializable {
 		//lines = lines.filter(new StringNotEquals(firstLine));
 		
 		log.info("First line of the data after conversion is {}", lines.first());
-		log.info("total count of the lines after conversion is {}", lines.count());
+		// log.info("total count of the lines after conversion is {}", lines.count());
 		
 		log.info("Now Converting data to Fortune500 objects");
 		JavaRDD<Fortune500> data = lines.map(new Convert2Fortune500());
 		
 		log.info("First line of the data after 2nd conversion is {}", data.first());
-		log.info("total count of the lines after 2nd conversion is {}", data.count());
+		// log.info("total count of the lines after 2nd conversion is {}", data.count());
 		
+		JavaPairRDD<Integer, Fortune500> yearWiseData = data.mapToPair(d -> new Tuple2<Integer, Fortune500>(d.getYear(), d));
+		JavaPairRDD<Long, Fortune500> rankWiseData = data.mapToPair(d -> new Tuple2<Long, Fortune500>(d.getRank(), d));
+		
+		
+		JavaPairRDD<Integer, Fortune500> highestValueYear = yearWiseData.reduceByKey((x, y) -> x.getProfitPercent() > y.getProfitPercent() ? x : y);
+		JavaPairRDD<Long, Fortune500> highestValueRank = rankWiseData.reduceByKey((x, y) -> x.getProfitPercent() > y.getProfitPercent() ? x : y);
+		
+		JavaPairRDD<Double, Fortune500> highestValueYear2 = highestValueYear.mapToPair(d -> new Tuple2<Double, Fortune500>(d._2.getProfitPercent(), d._2)).sortByKey();
+		highestValueYear = highestValueYear2.mapToPair(d -> new Tuple2<Integer, Fortune500>(d._2.getYear(), d._2));
+		
+		JavaPairRDD<Double, Fortune500> highestValueRank2 = highestValueRank.mapToPair(d -> new Tuple2<Double, Fortune500>(d._2.getProfitPercent(), d._2)).sortByKey();
+		highestValueRank = highestValueRank2.mapToPair(d -> new Tuple2<Long, Fortune500>(d._2.getRank(), d._2));
+		
+		log.info("Maximum earner of the year");
+		highestValueYear.take(10).forEach(System.out::println);
+
+		log.info("Maximum earned of the year");
+		highestValueRank.take(10).forEach(System.out::println);
 		// data is final dataframe to use for further processing...
-		data.saveAsTextFile(filePath + "_final.txt");
+		//data.saveAsTextFile(filePath + "_final.txt");
 		
 		
 	}
@@ -91,8 +113,8 @@ public class Fortune500Service implements Serializable {
 			// log.info("Cleaned String is '{}'  for rank '{}'", str1, str[0]);
 			
 			String year = (PatternsUtility.SPACE.split(str1))[2];
-			// log.info("Year = {}", year);
-
+			// log.info("Year = {}", year);			
+				
 			return new Fortune500(
 					Long.parseLong(str[0].trim()), 
 					str[1].trim(), Double.parseDouble(str[2].trim()), 
@@ -101,5 +123,12 @@ public class Fortune500Service implements Serializable {
 					Integer.parseInt(year.trim()));
 		}
 
+	}
+	
+	@Override
+	protected void finalize() throws Throwable {
+		super.finalize();
+		if (sc != null)
+			sc.close();
 	}
 }

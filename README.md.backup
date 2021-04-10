@@ -104,6 +104,8 @@ What things you need to install the software and how to install them
 * Eclipse
 	Download eclipse from https://www.eclipse.org/downloads/
 
+In order to run the kafka based examples either first configure a local kafka server or use any online service i.e. any online configured service
+
 
 	
 ### Installing
@@ -120,7 +122,7 @@ A step by step series of examples that tell you how to get a development env run
 	```
 		git clone https://github.com/DevSachinGupta/datasets
 	```
-3. 
+3. Clone the data generator repository and run the respective code after changeing 
 
 
 ## Running the tests

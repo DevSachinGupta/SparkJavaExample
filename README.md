@@ -101,8 +101,29 @@ What things you need to install the software and how to install them
 		SPARK_HOME=<Path-to-spark-extracted-folder>
 		HADOOP_HOME=<Path-to-spark-extracted-folder>
 	```
+* Apache Kafka
+	Using for streaming purpose so if don't want to run stream examples than skip.
+	Download kafka from https://kafka.apache.org/
+	
+	1. Untar files to folder
+	2. Open Multiple terminal
+	```
+		cd <Path-to-kafka-extracted-folder>
+		bin/zookeeper-server-start.sh config/zookeeper.properties
+	```
+	```
+		cd <Path-to-kafka-extracted-folder>
+		bin/kafka-server-start.sh config/server.properties
+	```
+	```
+		cd <Path-to-kafka-extracted-folder>
+		bin/kafka-topics.sh --create --topic viewrecords --bootstrap-server localhost:9092
+		bin/kafka-topics.sh --create --topic logs --bootstrap-server localhost:9092
+	```
 * Eclipse
 	Download eclipse from https://www.eclipse.org/downloads/
+
+In order to run the kafka based examples either first configure a local kafka server or use any online service i.e. any online configured service
 
 
 	
@@ -120,7 +141,14 @@ A step by step series of examples that tell you how to get a development env run
 	```
 		git clone https://github.com/DevSachinGupta/datasets
 	```
-3. 
+3. Clone the data generator repository and run the respective code after changing the required configurations
+
+	Using for streaming purpose so if don't want to run stream examples than skip.
+
+	```
+		git clone https://github.com/DevSachinGupta/data-generator
+	```
+4. 
 
 
 ## Running the tests
