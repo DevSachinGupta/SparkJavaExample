@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import me.sachingupta.sparkexamples.services.rdd.Fortune500Service;
 import me.sachingupta.sparkexamples.services.rdd.LogAnalysisService;
 import me.sachingupta.sparkexamples.services.rdd.WordCountService;
+import me.sachingupta.sparkexamples.services.sql.Fortune500DataAnalysis;
 
 public class Main {
 	
@@ -34,6 +35,8 @@ public class Main {
 				case "Fortune500":
 					(new Fortune500Service(args[1], args[2], args[3])).extract();
 					break;
+				case "Fortune500SQL":
+					(new Fortune500DataAnalysis(args[1], args[2], args[3])).extract();
 				default:
 					logger.info("Please provide a valid action to perform");
 					break;
