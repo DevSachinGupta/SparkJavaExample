@@ -1,5 +1,7 @@
 package me.sachingupta.sparkexamples;
 
+import java.util.Arrays;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -25,6 +27,8 @@ public class Main {
 			
 			//Path p =  
 			
+			logger.info("Arguments received :- " + Arrays.asList(args));
+			
 			switch (args[0]) {
 				case "LogAnalysis":
 					(new LogAnalysisService(args[1], args[2], args[3])).extract();
@@ -37,6 +41,7 @@ public class Main {
 					break;
 				case "Fortune500SQL":
 					(new Fortune500DataAnalysis(args[1], args[2], args[3])).extract();
+					break;
 				default:
 					logger.info("Please provide a valid action to perform");
 					break;
