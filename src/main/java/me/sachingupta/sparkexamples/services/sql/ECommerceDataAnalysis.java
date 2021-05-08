@@ -1,6 +1,15 @@
 package me.sachingupta.sparkexamples.services.sql;
 
-import static org.apache.spark.sql.functions.*;
+import static org.apache.spark.sql.functions.avg;
+import static org.apache.spark.sql.functions.callUDF;
+import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.count;
+import static org.apache.spark.sql.functions.countDistinct;
+import static org.apache.spark.sql.functions.dense_rank;
+import static org.apache.spark.sql.functions.lit;
+import static org.apache.spark.sql.functions.md5;
+import static org.apache.spark.sql.functions.sha2;
+import static org.apache.spark.sql.functions.sum;
 
 import java.io.Serializable;
 
@@ -13,6 +22,8 @@ import org.apache.spark.sql.api.java.UDF2;
 import org.apache.spark.sql.expressions.Window;
 import org.apache.spark.sql.expressions.WindowSpec;
 import org.apache.spark.sql.types.DataTypes;
+
+import scala.collection.immutable.Set.Set2;
 
 public class ECommerceDataAnalysis implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -44,45 +55,45 @@ public class ECommerceDataAnalysis implements Serializable {
 		Dataset<Row> sellersData = sc.read().parquet(filePath + "/sellers"); // _parquet
 		Dataset<Row> salesData = sc.read().parquet(filePath + "/sales").sample(0.3);
 		
-//		System.out.println("No. of products available are " + productsData.count());
-//		System.out.println("No. of sellers  available are " + sellersData.count());
-//		System.out.println("No. of sold data available are " + salesData.count());
+		System.out.println("No. of products available are " + productsData.count());
+		System.out.println("No. of sellers  available are " + sellersData.count());
+		System.out.println("No. of sold data available are " + salesData.count());
 
-//		salesData.groupBy(col("date")).agg(countDistinct("product_id").alias("count")).orderBy(col("count").desc()).show();
+		System.out.println("No. of Distinct products sold per day");
+		salesData.groupBy(col("date")).agg(countDistinct("product_id").alias("count")).orderBy(col("count").desc()).show();
 		
 		// Dataset<Row> data = salesData.join(productsData, salesData.col("product_id").equalTo(productsData.col("product_id")))
 		// 							 .join(sellersData, salesData.col("seller_id").equalTo(sellersData.col("seller_id")));
 		Dataset<Row> data = salesData.join(productsData, "product_id").join(sellersData, "seller_id");
 		
-		// data.groupBy(col("date")).agg(countDistinct(col("product_id")).alias("count")).show();
+		//data.groupBy(col("date")).agg(countDistinct(col("product_id")).alias("count")).show();
 		
 		data = data.withColumn("earnedMoney", col("num_pieces_sold").multiply(col("price")));
 		
-		// data.agg(avg(col("earnedMoney")).alias("Average money Earned")).show();
+		data.agg(avg(col("earnedMoney")).alias("Average money Earned")).show();
 			
 		data = data.withColumn("contributionPerOrder", col("num_pieces_sold").divide(col("daily_target")));
 		
-		// data.groupBy(col("seller_id"), col("date")).agg(avg("contributionPerOrder").cast("Decimal(10, 10)").alias("AverageContributionPerOrder")).show(false);
+		data.groupBy(col("seller_id"), col("date")).agg(avg("contributionPerOrder").cast("Decimal(10, 10)").alias("AverageContributionPerOrder")).show(false);
 		
 		Dataset<Row> piecesSold = data.groupBy(col("product_id"), col("seller_id")).agg(sum(col("num_pieces_sold")).alias("totalPiecesSold"));
 		
-		WindowSpec window = Window.partitionBy(col("product_id")).orderBy(col("totalPiecesSold").desc());
+		WindowSpec window_desc = Window.partitionBy(col("product_id")).orderBy(col("totalPiecesSold").desc());
+		WindowSpec window_asc = Window.partitionBy(col("product_id")).orderBy(col("totalPiecesSold").asc());
 		
+		piecesSold = piecesSold.withColumn("rank_asc", dense_rank().over(window_asc))
+								.withColumn("rank_desc", dense_rank().over(window_desc));
 		
-		piecesSold = piecesSold.withColumn("rank", rank().over(window));
+		Dataset<Row> singleSelller = piecesSold.where(col("rank_asc").equalTo(col("rank_desc")))
+												.select(col("product_id"), col("seller-id"), lit("Only seller or multiple sellers with the same results").alias("type"));
 		
-		//piecesSold = piecesSold.withColumn("secondScorer", when(col("rank").equalTo("2"), col("seller_id")).over(window));
-
-		//piecesSold = piecesSold.withColumn("leastScorer", when(col("rank").equalTo(max(col("rank"))), col("seller_id")).over(window));
+		Dataset<Row> multipleSelller = piecesSold.where(col("rank_desc").equalTo(2)).select(col("product_id"), col("seller-id"), lit("Second top seller").alias("tyoe"));
 		
-//		piecesSold.show();
+		Dataset<Row> leastSelller = piecesSold.where(col("rank_asc").equalTo(1)).select(col("product_id"), col("seller-id"), lit("Second top seller").alias("tyoe"))
+												.join(singleSelller, new Set2<String>("product_id", "seller_id").toSeq(), "left_anti")
+												.join(multipleSelller, new Set2<String>("seller_id", "product_id").toSeq(),"left_anti");
 		
-		//piecesSold.orderBy(col("rank").desc()).show();
-		
-		//piecesSold.agg(max(col("rank"))).show();
-		
-		// piecesSold.groupBy(col("product_id")).agg(count(col("seller_id")).alias("sellersCount")).orderBy(col("sellersCount").desc()).show();
-		
+		leastSelller.union(multipleSelller).union(singleSelller).show();
 		
 		data = data.withColumn("hashed_bill", callUDF("getHashedValue", col("order_id").cast(DataTypes.LongType), col("bill_raw_text")));
 		
