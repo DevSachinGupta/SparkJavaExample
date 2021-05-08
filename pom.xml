@@ -81,6 +81,20 @@
   		<version>${apache.spark.version}</version>
   		<!-- <scope>provided</scope> -->
   	</dependency>
+  	<!-- Jackson libs as default available are not compatible as downloading the 2.9 version -->
+  	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-scala -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.module</groupId>
+	    <artifactId>jackson-module-scala_${apache.spark.scala.build.version}</artifactId>
+	    <version>2.10.5</version>
+	</dependency>
+	  	
+  	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.10.5.1</version>
+	</dependency>
   	
   	<!-- Project Lombook for reducing the boilerplate -->
   	<dependency>

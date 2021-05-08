@@ -120,6 +120,9 @@ public class Fortune500DataAnalysis implements Serializable{
 		profitPercentData = profitPercentData.na().fill(0.0f);
 		profitPercentData.show();
 		
+		data3.write().format("csv").save("Companies occured more than 5 times.csv");
+		rankData.write().format("csv").save("Companies Rank data of top 10.csv");
+		profitPercentData.write().format("csv").save("Companies Profit data of top 10.csv");
 		
 	}
 	
